@@ -4,10 +4,36 @@ const path = require('path');
 const multer = require('multer');
 const musuario = require('../models/usuario');
 const crypto = require('crypto');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+const { disconnect } = require('process');
+const usuario = require('../models/usuario');
 
 function sha256(string){
     return crypto.createHash('sha256').update(string).digest('hex');
 }
+
+passport.serializeUser( function(user, done){
+    done(null,user);
+});
+
+passport.deserializeUser (function(user,done) {
+    done(null,user);
+});
+
+passport.use (new LocalStrategy ( (username, password,done)=>{
+    musuario.verificar(username, sha256(password))
+    .then( usuario =>{
+        if(usuario) {
+            session.usuario= usuario;
+            done (null,usuario);
+        }
+        else{
+            done(null, false);
+        }
+    })
+}));
 
 router.get('/', (req,res) =>{
     res.render('index');
@@ -48,4 +74,10 @@ router.post('/registro2',uploadImage,(req,res)=>{
     .then(res.redirect('/'));
 });
 
+router.post('/login2', passport.authenticate('local', {failureRedirect:'/login'}),
+function (req,res){
+
+    console.log('Autentificado!!!');
+    console.log(session.usuario);
+})
 module.exports = router;
