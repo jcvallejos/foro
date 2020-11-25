@@ -1,0 +1,26 @@
+{
+  "name": "foro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-mysql-session": "^2.1.4",
+    "express-session": "^1.17.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}

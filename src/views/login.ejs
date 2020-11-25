@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('plantilla/cabeza') %>
+</head>
+<body>
+<div class="container">
+<div class="container-fluid">
+    <%- include('plantilla/titulo') %>
+    <%- include('plantilla/menu') %>
+    <div class="login-box">
+        <img src="imgs/user.jpeg" class="avatar" alt="Avatar Image">
+        <h1>Ingreso al sistema</h1>
+        <form>
+          <label for="username">Usuario</label>
+          <input type="text" placeholder="Ingrese usuario" autofocus>
+          <label for="password">Contraseña</label>
+          <input type="password" placeholder="Ingrese contraseña">
+          <input type="submit" class="btn btn-info" value="Ingresar">
+          <br>
+          <a href="/registro">Si no es usuario aun, Registrese porfavor.</a>
+        </form>
+      </div>
+    <%- include('plantilla/pie') %>
+</div>
+</div>
+</body>
+</html>

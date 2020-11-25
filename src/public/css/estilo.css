@@ -1,0 +1,116 @@
+#titulo {
+    font-family: 'Syne Tactile', cursive;
+    font-size: 50px;
+}
+#eslogan {
+    font-family: 'Syne Tactile', cursive;
+}
+div img {
+    width: 100%;
+}
+#barratitulo {
+ background-color: #004d55;
+ color: beige;
+ margin-top: 0.5em;
+
+}
+body {
+    background-color: antiquewhite;
+}
+#barramenu {
+    background-color: #007f95;
+    padding: 1em;
+}
+#barrapie {
+    background-color: #004d55;
+    color: beige;
+    padding: 1em;
+}
+#barratarjetas {
+    background-color: #007f95;
+    padding: 1.5em;
+    
+}
+#invitacion {
+    margin-top: 8em;
+}
+
+.menu {
+    color:beige;
+    display: block;
+}
+.menu:hover {
+    background-color: beige;
+    color: #007f95;
+}
+
+.login-box {
+    width: 320px;
+    height: 420px;
+    background: rgba(0,77,85,1);
+    color: beige;
+    padding: 0px 30px;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  .registro-box {
+    width: 520px;
+    
+    background: rgba(0,77,85,1);
+    color: beige;
+    padding: 0px 30px;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  
+  .login-box .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    top: -30px;
+    
+  }
+  
+  .login-box h1, .registro-box h1 {
+    text-align: center;
+    font-size: 22px;
+  }
+  
+  .login-box label ,.registro-box label  {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+  }
+  
+  .login-box input, .registro-box input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .login-box input[type="text"], .login-box input[type="password"], 
+  .registro-box input[type="text"], .registro-box input[type="password"]
+  {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  
+  .login-box a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+  }
+  
+  .login-box a:hover {
+    color: #fff;
+  }
