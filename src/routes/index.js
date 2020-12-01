@@ -8,7 +8,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const { disconnect } = require('process');
-const usuario = require('../models/usuario');
+const mtema = require('../models/tema');
 
 function sha256(string){
     return crypto.createHash('sha256').update(string).digest('hex');
@@ -40,7 +40,11 @@ router.get('/', (req,res) =>{
 });
 
 router.get('/foros', (req,res) =>{
-    res.render('foros');
+    mtema.listapublica()
+    .then(temas =>{
+        res.render('foros',{temas});
+    })
+    
 });
 
 router.get('/login', (req,res) =>{
@@ -76,8 +80,8 @@ router.post('/registro2',uploadImage,(req,res)=>{
 
 router.post('/login2', passport.authenticate('local', {failureRedirect:'/login'}),
 function (req,res){
-
-    console.log('Autentificado!!!');
-    console.log(session.usuario);
+    if (session.usuario.tipo==1) res.redirect('/usuario/');
+    else res.redirect('/administrador/');
+    
 })
 module.exports = router;

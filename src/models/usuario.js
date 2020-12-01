@@ -1,4 +1,3 @@
-const { render } = require('ejs');
 const conexion = require('../database');
 module.exports ={
 registro (usuario, contra, nombre, correo, foto) {

@@ -2,6 +2,18 @@
 <html lang="en">
 <head>
     <%- include('plantilla/cabeza') %>
+<style>
+    .foto {
+        width: 2cm;
+        height: 2cm;
+        border-radius: 1cm;
+    }
+    .apodo {
+        background-color: azure;
+        display: block;
+        text-align: center;
+    }
+</style>
 </head>
 <body>
 <div class="container">
@@ -10,7 +22,30 @@
     <%- include('plantilla/menu') %>
     <h1>Foros</h1>
     <hr>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor ea et porro, nisi dignissimos id nostrum sapiente non, officia blanditiis enim quas cupiditate omnis iste eum maiores sint incidunt recusandae.
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Nro.</th>
+                <th>Autor</th>
+                <th>Tema</th>
+                <th>Vistas</th>
+                <th>Comentarios</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+    <% i=1;temas.forEach(tema => {%>
+        <tr>
+            <td><%= i++ %></td>
+            
+            <td><img class="foto" src="/fotos/<%= tema.foto %>">
+                <span class="apodo"><%= tema.apodo %></span></td>
+            <td><%= tema.tema %></td>
+            <td><%= tema.vistas %></td>
+            <td><%= tema.comentarios %></td>
+            <td><%= moment(tema.fecha).fromNow() %></td>
+        </tr>
+    <% }); %>
+    </table>
 
     <%- include('plantilla/pie') %>
 </div>
