@@ -83,5 +83,10 @@ function (req,res){
     if (session.usuario.tipo==1) res.redirect('/usuario/');
     else res.redirect('/administrador/');
     
-})
+});
+
+router.get('/logout', (req,res)=>{
+    req.logOut();
+    res.redirect('/');
+});
 module.exports = router;
