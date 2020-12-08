@@ -27,11 +27,12 @@ router.get('/foros', estalogueado, esusuario, (req,res) =>{
 
 router.get('/comentarios/:id', estalogueado, esusuario, (req,res)=>{
     id = req.params.id;
+    id_usuario_session = session.usuario.id_usuario; 
     mtema.nuevavista(id)
     .then(
         mtema.listacomentarios(id)
         .then(comentarios =>{
-            res.render('usuario/comentarios',{comentarios, idtema:id})
+            res.render('usuario/comentarios',{comentarios, idtema:id, id_usuario_session})
         })
     )
 });
@@ -42,6 +43,20 @@ router.post('/comentar', estalogueado, esusuario, (req,res)=>{
     mcomentario.agregarcomentario(id_tema,comen, id_usuario)
     .then(res.redirect('/usuario/comentarios/'+id_tema));
 
+});
+router.get('/borrar/:idcomen/:idtema', estalogueado, esusuario, (req,res)=>{
+   id_comentario = req.params.idcomen;
+   id_tema = req.params.idtema;
+   mcomentario.borrarcomentario(id_comentario)
+   .then(res.redirect('/usuario/comentarios/'+id_tema))
+});
+
+router.post('/modificar', estalogueado, esusuario, (req,res)=>{
+    comentario = req.body.comentario2;
+    id_tema = req.body.id_tema2;
+    id_comentario = req.body.id_comentario2;
+    mcomentario.modificarcomentario(id_comentario, comentario)
+    .then(res.redirect('/usuario/comentarios/'+id_tema))
 });
 
 module.exports = router;

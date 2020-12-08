@@ -9,5 +9,26 @@ agregarcomentario (id_tema, comentario,id_usuario ) {
             else resolve();
         }
     } )
+},
+borrarcomentario (id_comentario) {
+    return new Promise((resolve,reject)=>{
+        conexion.query('delete from comentario where id_comentario= ?',
+        [id_comentario]),
+        (err) => {
+            if (err) reject(err);
+            else resolve();
+        }      
+    })
+},
+modificarcomentario (id_comentario,comentario ) {
+    return new Promise( (resolve,reject) =>{
+        conexion.query ('update comentario set comentario= ? where id_comentario= ?',
+        [comentario, id_comentario]),
+        (err) => {
+            if(err) reject(err);
+            else resolve();
+        }
+    } )
 }
+
 }
