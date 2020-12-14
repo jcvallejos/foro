@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../plantilla/cabeza') %>
+<style>
+    .foto {
+        width: 2cm;
+        height: 2cm;
+        border-radius: 1cm;
+    }
+    .apodo {
+        background-color: azure;
+        display: block;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="container-fluid">
+    <%- include('../plantilla/titulo') %>
+    <%- include('../plantilla/menu_admin') %>
+    <h1>Foros</h1>
+    <hr>
+    <table class="table table-hover table-bordered">
+
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#NuevoTemaModal" >Nuevo Tema</button>
+        <thead>
+            <tr>
+                <th>Nro.</th>
+                <th>Autor</th>
+                <th>Tema</th>
+                <th>Vistas</th>
+                <th>Comentarios</th>
+                <th>Fecha</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+    <% i=1;temas.forEach(tema => {%>
+        <tr>
+            <td><%= i++ %></td>
+            
+            <td><img class="foto" src="/fotos/<%= tema.foto %>">
+                <span class="apodo"><%= tema.apodo %></span></td>
+            <td><%= tema.tema %></td>
+            <td><%= tema.vistas %></td>
+            <td><%= tema.comentarios %></td>
+            <td><%= moment(tema.fecha).fromNow() %></td>
+            <td><a href="/administrador/comentarios/<%= tema.id_tema %>" class="btn btn-info btn-sm">Comentar</a>
+                <a href="/administrador/borrartema/<%= tema.id_tema %>"  class="btn btn-danger btn-sm">Borrar</a>
+                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModifTemaModal" 
+                data-idtema="<%= tema.id_tema %>" data-tema="<%= tema.tema %>" data-publico="<%= tema.tipo%>">Editar</button>
+            </td>
+        </tr>
+    <% }); %>
+    </table>
+
+    <div class="modal fade" id="NuevoTemaModal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Nuevo Tema</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/administrador/nuevotema" method="POST">   
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Tema:</label>
+                  <textarea class="form-control" id="tema" name="tema"></textarea>
+                  <label for="publico"> <input type="checkbox" id="publico" name="publico" > Público  </label>
+                </div>
+                <br>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="modal fade" id="ModifTemaModal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modificar Tema</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/administrador/modificatema" method="POST">   
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Tema:</label>
+                  <textarea class="form-control" id="tema2" name="tema2"></textarea>
+                  <input type="hidden" id="idtema2" name="idtema2">
+                  <label for="publico"> <input type="checkbox" id="publico2" name="publico2" > Público  </label>
+                </div>
+                <br>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script>
+        $('#NuevoTemaModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+        });
+
+        $('#ModifTemaModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var id_tema= button.data('idtema');
+            var tema= button.data('tema');
+            var publico= button.data('publico');
+            $('#idtema2').val(id_tema);
+            $('#tema2').val(tema);
+            if(publico==1)
+            $('#publico2').prop('checked',true);
+            else 
+            $('#publico2').prop('checked',false);
+            
+        })
+        
+    </script>
+
+
+    <%- include('../plantilla/pie') %>
+</div>
+</div>
+</body>
+</html>
